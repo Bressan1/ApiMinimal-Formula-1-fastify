@@ -1,81 +1,174 @@
-<div align="center">
+# Minimal F1 API (Fastify)
 
-  <img src="./.github/assets/blue-saiyan-bg.png" alt="Logo" height="200">
-  <h1 align="center"><strong>NODE BOILERPLATE - BLUE EDITION</strong></h1>
-  <p align="center">
-	  Don't start a new Node project from zero!<br> Use this simple <b>Nodejs</b> boilerplate with pre-configured <b>Typescript</b> in a modern way.
-  </p>
+A minimal **Formula 1 REST API** built with **Fastify** and **TypeScript**.
+This project exposes simple **GET endpoints** to retrieve **teams** and **drivers**, using in-memory data only.
 
-</div>
+The goal of this API is to serve as a **learning project**, **mock backend**, or **technical portfolio example** for Node.js + Fastify.
 
-<br />
+---
 
-  <!-- Badges -->
-<div align="center">
-  
-  [![TypeScript version][ts-badge]][typescript-5-4]
-  [![Node.js version][nodejs-badge]][nodejs]
+## Features
 
-</div>
+* ⚡ Fastify with logging enabled
+* 🌐 CORS enabled (open origin)
+* 📦 In-memory data (no database)
+* 🔎 Simple REST endpoints
+* 🧩 Typed route params (TypeScript)
 
-# 🚀 Technologies
+---
 
-This code source was developed with the following items:
+## Tech Stack
 
-### 📦 Dependencies
+* **Node.js**
+* **Fastify**
+* **TypeScript**
+* **@fastify/cors**
 
-- [typescript][typescript-npm] - Superset for application scale JavaScript development
-- [tsx][tsx-npm] - TypeScript Execute (tsx): Enable Node.js to run TypeScript
-- [tsup][tsup-npm] - Bundle your TypeScript library with no config, powered by esbuild
-- [@types/node][@types/node-npm] - type definitions for node
+---
 
-### 📄 Files
+## Requirements
 
-- `.gitignore` - Ignore folders like node_modules
-- `.env` - Enviroment variables
-- `tsconfig.json` - Typescript configure Options
+* Node.js 18+
+* npm / yarn / pnpm
 
-### ⚡ Scripts
+---
 
-- `npm run dist`: Compiles TypeScript files to JavaScript in the dist directory.
-- `npm run start:dev`: Runs the server in development mode with environment variables loaded from the .env file.
-- `npm run start:watch`: Runs the server in development mode with support for automatic reload on file changes.
-- `npm run start:dist`: Compiles the project and runs the compiled version from the dist directory.
+## Running the Project
 
-# 👨‍💻 How To Use
-
-click in **[Use this template]** OR
-
-To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js v20+](https://nodejs.org/en/) + [NPM v10+](https://nodejs.org/en/) installed on your computer. From your command line:
+### Install dependencies
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/felipeAguiarCode/node-blue-boilerplate
-
-# Go into the repository
-$ cd node-blue-boilerplate
-
-# Install dependencies
-$ npm install
+npm install
 ```
 
-## Author
+### Run the server
 
-| [<img src="https://avatars3.githubusercontent.com/u/37452836?s=96&v=4"><br><sub>Felipe Aguiar</sub>](https://github.com/felipeAguiarCode) |
-| :---------------------------------------------------------------------------------------------------------------------------------------: |
-|                                            [Linkedin](www.linkedin.com/in/felipe-aguiar-exe/)                                             |
+```bash
+npm run dev
+```
 
-# Credits
+The API will be available at:
 
-icons by [Pino Lamanna][dribble-icon]
+```
+http://localhost:3333
+```
 
-[typescript]: https://www.typescriptlang.org/
-[typescript-5-4]: https://www.typescriptlang.org/
-[ts-badge]: https://img.shields.io/badge/TypeScript-5.4-blue.svg
-[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2020.00-blue.svg
-[nodejs]: https://nodejs.org/
-[dribble-icon]: https://dribbble.com/Schakalwal
-[typescript-npm]: https://www.npmjs.com/package/typescript
-[tsx-npm]: https://www.npmjs.com/package/tsx
-[tsup-npm]: https://www.npmjs.com/package/tsup
-[@types/node-npm]: https://www.npmjs.com/package/@types/node
+---
+
+## API Endpoints
+
+### Get All Teams
+
+**GET** `/teams`
+
+Response:
+
+```json
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Ferrari",
+      "base": "Maranello, Itália"
+    }
+  ]
+}
+```
+
+---
+
+### Get All Drivers
+
+**GET** `/drivers`
+
+Response:
+
+```json
+{
+  "drivers": [
+    {
+      "id": 1,
+      "name": "lewis hamilton",
+      "team": "ferrari"
+    }
+  ]
+}
+```
+
+---
+
+### Get Driver by ID
+
+**GET** `/drivers/:id`
+
+Returns a single driver by ID.
+
+* `200 OK` if found
+* `404 Not Found` if the driver does not exist
+
+Response (success):
+
+```json
+{
+  "driver": {
+    "id": 1,
+    "name": "lewis hamilton",
+    "team": "ferrari"
+  }
+}
+```
+
+Response (error):
+
+```json
+{
+  "error": "motorista não encontrado"
+}
+```
+
+---
+
+## Example Requests
+
+```bash
+curl http://localhost:3333/teams
+curl http://localhost:3333/drivers
+curl http://localhost:3333/drivers/1
+curl http://localhost:3333/drivers/99
+```
+
+---
+
+## Project Characteristics
+
+* No database (arrays only)
+* No authentication
+* No pagination
+* No environment variables
+
+This is intentional to keep the project **simple and easy to understand**.
+
+---
+
+## Possible Improvements
+
+* Add team → drivers relationship endpoint
+* Normalize data using `teamId`
+* Add Swagger / OpenAPI documentation
+* Add validation (Zod or Fastify schema)
+* Add unit tests
+* Add pagination and filters
+
+---
+
+## Use Cases
+
+* Backend learning project
+* Fastify reference
+* Mock API for frontend apps
+* Technical interview demo
+
+---
+
+## Lice
+
